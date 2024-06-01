@@ -10,7 +10,7 @@ root = customtkinter.CTk()
 connection = sqlite3.connect("dados_usuarios.db")
 cursor = connection.cursor()
 # Webbroser
-url = "www.google.com"
+url = "http://127.0.0.1:8050/"
 
 
 class Databank():
@@ -82,6 +82,7 @@ class Application():
 
             # Verificação de credenciais
             if usuario is not None and password == usuario[2]:
+
                 # Login bem-sucedido
                 print("Login bem-sucedido!")
                 webbrowser.open(url)
@@ -152,7 +153,7 @@ class Application():
 
                 # Tratamento de dados da senha para o banco de dados
                 if senha == confirm_senha and len(senha) >= 8:
-                    msg = tk.messagebox.showinfo(
+                    msg = ttk.messagebox.showinfo(
                         title="Sucesso", message="Usuario salvo com sucesso")
 
                     # Enviando a query para o banco de dados SQL
@@ -161,10 +162,10 @@ class Application():
                     connection.commit()
 
                 elif len(senha) < 8:
-                    msg_error = tk.messagebox.showerror(
+                    msg_error = ttk.messagebox.showerror(
                         title="Quantidade de caracteres", message="A quantidade de caracteres deve ser maior que 12")
                 else:
-                    msg_error = tk.messagebox.showerror(
+                    msg_error = ttk.messagebox.showerror(
                         title="Confirmação de senha", message="As senhas não estão iguais")
 
             # Botão para confirmar o registro
