@@ -1,46 +1,33 @@
 import pandas as pd
+from dash import Dash, html, dcc
+import plotly.express as px
 
 # Importa a base de dados
 df = pd.read_excel("FaculdadeExcel.xlsx")
-
+print(df)
 # Verificando a quantidade de linhas com valores nulos e
 # Excluindo linhas com valores nulos nas colunas relevantes (se necessário)
-if df['genero'].isnull().sum() > 0 or df['medico'].isnull().sum() > 0:
-    df.dropna(subset=['genero', 'medico'], inplace=True)
 
+df_novo = df.loc[:, ['medico', 'especialidade']]
+print(df_novo)
 
-def contagem_masc_fem_doutor(genero_pacie, nome_doutor):
-    """
-    Função para contar o número de pacientes por gênero atendidos por um médico específico.
+# Run this app with `python app.py` and
+# visit http://127.0.0.1:8050/ in your web browser.
 
-    Argumentos:
-        genero_pacie (str): Gênero do paciente ("Masculino" ou "Feminino").
-        nome_doutor (str): Nome do médico a ser pesquisado.
+app = Dash(__name__)
 
-    Retorna:
-        int: Quantidade de pacientes do gênero especificado atendidos pelo médico.
-    """
+fig = px.bar(df_novo, x="medico", y="especialidade", barmode="group")
 
-    try:
-        # Validando valores de entrada
-        if genero_pacie not in ['Masculino', 'Feminino']:
-            raise ValueError(f"Gênero inválido: {genero_pacie}")
-        if nome_doutor not in df['medico'].unique():
-            raise ValueError(f"Nome do médico inválido: {nome_doutor}")
+app.layout = html.Div(children=[
+    html.H1(children='Hello Dash'),
+    html.Div(children='''
+        Dash: A web application framework for your data.
+    '''),
+    dcc.Graph(
+        id='example-graph',
+        figure=fig
+    )
+])
 
-        # Filtrando dados
-        pacientes_filtrados = df[(df['genero'] == genero_pacie) & (df['medico'] == nome_doutor)]
-        print(pacientes_filtrados)
-
-        # Contando pacientes
-        numero_pacientes = pacientes_filtrados.shape[0]
-
-        # Retornando resultado
-        return numero_pacientes
-
-    except ValueError as e:
-        print(f"Erro: {e}")
-        return None
-
-
-
+if __name__ == '__main__':
+    app.run(debug=True)
