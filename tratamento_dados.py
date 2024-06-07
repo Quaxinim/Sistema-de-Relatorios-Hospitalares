@@ -38,34 +38,29 @@ df_genero = pd.DataFrame(dados, columns=["Genero", "Quantidade de Exames"])
 fig1 = px.bar(df_genero, x="Genero", y="Quantidade de Exames", color='Genero', barmode="group")
 
 
-def iniciar_servidor():
-    app.layout = html.Div(children=[
-        html.H1(children='Dashboard de atendimentos'),
-        html.H2(children='''
-        Contagem de exames mais procurados:
-        '''),
+app.layout = html.Div(children=[
+    html.H1(children='Dashboard de atendimentos'),
+    html.H2(children='''
+    Contagem de exames mais procurados:
+    '''),
+    html.Div(children='''
+        OBS: Atenção ao preenchimento da planilha.
+    '''),
+    dcc.Graph(
+        id='grafico_exames',
+        figure=fig
+    ),
+    html.Div(children=[
+        html.H2(children='Relação entre genero e quantidade de exames'),
         html.Div(children='''
-            OBS: Atenção ao preenchimento da planilha.
+        Abaixo tem a contagem de quantidade de exames feitos e a relação entre homems e mulheres
         '''),
-        dcc.Graph(
-            id='grafico_exames',
-            figure=fig
-        ),
-        html.Div(children=[
-            html.H2(children='Relação entre genero e quantidade de exames'),
-            html.Div(children='''
-            Abaixo tem a contagem de quantidade de exames feitos e a relação entre homems e mulheres
-            '''),
-        dcc.Graph(
-            id='grafico_',
-            figure=fig1
-        )
-        ])
-    ]
+    dcc.Graph(
+        id='grafico_',
+        figure=fig1
     )
+    ])
+])
 
-    if __name__ == '__main__':
-        app.run(debug=True)
-
-
-iniciar_servidor()
+if __name__ == '__main__':
+    app.run(debug=True)

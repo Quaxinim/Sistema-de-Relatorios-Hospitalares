@@ -8,7 +8,7 @@ import tratamento_dados
 # Ctk
 root = customtkinter.CTk()
 # Sqlite3
-connection = sqlite3.connect("dados_usuarios.db")
+connection = sqlite3.connect("../dados_usuarios.db")
 cursor = connection.cursor()
 # Webbroser
 url = "http://127.0.0.1:8050/"
@@ -16,7 +16,7 @@ url = "http://127.0.0.1:8050/"
 
 class Databank():
     # Fazendo a conexão com o banco de dados
-    connection = sqlite3.connect("dados_usuarios.db")
+    connection = sqlite3.connect("../dados_usuarios.db")
     cursor = connection.cursor()
 
     # Cria as linhas e colunas
