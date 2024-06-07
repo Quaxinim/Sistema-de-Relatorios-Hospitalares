@@ -3,6 +3,7 @@ import tkinter as tk
 from tkinter import ttk
 import sqlite3
 import webbrowser
+import tratamento_dados
 
 # Ctk
 root = customtkinter.CTk()
@@ -85,6 +86,7 @@ class Application():
 
                 # Login bem-sucedido
                 print("Login bem-sucedido!")
+                tratamento_dados.iniciar_servidor()
                 webbrowser.open(url)
                 # Chamar a próxima tela ou realizar outra ação
             else:
