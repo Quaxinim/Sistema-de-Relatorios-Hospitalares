@@ -3,7 +3,7 @@ import tkinter as tk
 from tkinter import ttk
 import sqlite3
 import webbrowser
-import tratamento_dados
+import main
 
 # Ctk
 root = customtkinter.CTk()
