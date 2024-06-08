@@ -62,20 +62,15 @@ app.layout = html.Div(children=[
         )
     ]),
     html.Div(children=[
-        html.H2(children='Placeholder'),
+        html.H2(children='Tabela de atendimentos'),
         html.Div(children='''
-    Place_holder
+    Customizações:
     '''),
         # Filtros
         dcc.Dropdown(
-            id='dropdown-horario',
-            options=[{'label': n, 'value': n} for n in df['horario'].unique()],
-            value='Todos os horarios'),
-        dcc.Dropdown(
-            id='dropdown-nome-paciente',
-            options=[{'label': n, 'value': n} for n in df['nome do paciente'].unique()],
-            value='Todos os pacientes',
-        ),
+            id='dropdown-genero',
+            options=[{'label': n, 'value': n} for n in opcoes],
+            value='Todos os generos'),
         # Datatable
         dash_table.DataTable(
             id='datatable',
@@ -87,22 +82,17 @@ app.layout = html.Div(children=[
 
 @app.callback(
     Output('datatable', 'data'),
-    [Input('dropdown-horario', 'value'),
-     Input('dropdown-nome-paciente', 'value')
+    [Input('dropdown-genero', 'value'),
      # ... Adicione inputs para outros dropdowns aqui
      ]
 
 
 )
-def update_datatable(horario_selecionado, nome_paciente_selecionado):
+def update_datatable(genero_selecionado):
     # Filtre o DataFrame com base nas seleções
     df_filtrado = df
-    if horario_selecionado == 'Todos os horarios':
-        df_filtrado = df_filtrado[df_filtrado['horario'] == horario_selecionado]
-    if nome_paciente_selecionado != 'Todos os pacientes':
-        df_filtrado = df_filtrado[df_filtrado['nome do paciente'] == nome_paciente_selecionado]
-    # ... Adicione filtros para outros campos de filtro aqui
-    # Retorne o DataFrame filtrado como dicionário de registros
+    if genero_selecionado != 'Todos os generos':
+        df_filtrado = df_filtrado[df_filtrado['genero'] == genero_selecionado]
     return df_filtrado.to_dict('records')
 
 
