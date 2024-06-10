@@ -14,7 +14,6 @@ opcoes.append("Todos os generos")
 
 # Dataframes
 df_exames = exame_mais_usados.df_sem_duplicacao
-opcoes_horarios = list(df['horario'].unique())
 
 # Primeiro grafico (Quantidade de exames)
 fig = px.bar(df_exames, x="especialidade", y="contagem", color='genero', barmode="group")

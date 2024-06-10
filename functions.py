@@ -1,4 +1,6 @@
 import pandas as pd
+
+
 def importa_excel():
     # Importa a base de dados
     df = pd.read_excel("FaculdadeExcel.xlsx")

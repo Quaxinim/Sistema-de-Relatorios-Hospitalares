@@ -1,13 +1,14 @@
 import pandas as pd
 
+# Le o excel
 df = pd.read_excel("FaculdadeExcel.xlsx")
 exames = df['especialidade']
 
-# Adiciona as duas colunas de nome do paciente e especialidade a um novo DF
+# Adiciona três colunas a um novo dataframe
 df_paciente_atendimento = df.loc[:, ['nome do paciente', 'especialidade', 'genero']]
 df_paciente_atendimento['especialidade'] = df['especialidade'].str.upper()
 
-# Remove a linha que contem um valor vazio na coluna "nome do paciente" e "especialidade"
+# Remove a linha que contem um valor vazio na coluna "nome do paciente", "especialidade" e genero
 df_paciente_atendimento = df_paciente_atendimento.dropna(
     subset='nome do paciente')
 df_paciente_atendimento = df_paciente_atendimento.dropna(
